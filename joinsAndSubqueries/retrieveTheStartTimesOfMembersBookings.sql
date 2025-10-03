@@ -1,9 +1,7 @@
-WITH dave as (
-  SELECT memid as id
-  FROM cd.members
-  WHERE surname = 'Farrell' AND
-  firstname = 'David'
-  )
-SELECT starttime
-FROM cd.bookings
-WHERE memid = (SELECT id FROM dave);
+SELECT bks.starttime
+FROM cd.bookings bks
+    INNER JOIN cd.members mems
+        ON bks.memid = mems.memid
+WHERE
+    mems.firstname = 'David' AND
+    mems.surname = 'Farrell'
